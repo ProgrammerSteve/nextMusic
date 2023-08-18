@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import clairDeLune from "../../public/pdfs/debussyclairdelune.pdf";
+// import clairDeLune from "../../public/pdfs/debussyclairdelune.pdf";
 
 const SheetMusic = () => {
   return (
@@ -9,7 +9,7 @@ const SheetMusic = () => {
       <object
         className="w-[100%] h-[100%]"
         type="application/pdf"
-        data={clairDeLune}
+        data={"/pdfs/debussyclairdelune.pdf"}
       ></object>
     </div>
   );

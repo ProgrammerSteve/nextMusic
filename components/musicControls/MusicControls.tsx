@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"; // icons for play and pause
@@ -6,7 +8,12 @@ import { IconContext } from "react-icons"; // for customazing the icons
 
 const color = "#50505d";
 
-const MusicControls = ({ isPlaying, playingButton }) => {
+interface Props {
+  isPlaying: boolean;
+  playingButton: () => void;
+}
+
+const MusicControls = ({ isPlaying, playingButton }: Props) => {
   return (
     <div>
       <button className="bg-none border-0 items-center justify-center">

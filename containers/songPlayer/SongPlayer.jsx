@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import useSound from "use-sound";
 import debussy from "../../public/music/Claire_De_Luna.mp3";
-import SongDetails from "../../components/songDetails/SongDetails.jsx";
-import TimeControls from "../../components/timeControls/TimeControls.jsx";
-import MusicControls from "../../components/musicControls/MusicControls.jsx";
+import SongDetails from "../../components/songDetails/SongDetails";
+import TimeControls from "../../components/timeControls/TimeControls";
+import MusicControls from "../../components/musicControls/MusicControls";
 
 import { AiFillHome } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";

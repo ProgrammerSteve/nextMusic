@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
+
 const SongCard = ({ song }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   const handleToggle = () => {
