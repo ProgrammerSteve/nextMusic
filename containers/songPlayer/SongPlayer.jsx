@@ -15,6 +15,10 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
 
+{
+  /* <MdDriveFolderUpload className="fill-white w-[40px] h-[40px]" />
+<BsFillPersonFill className="fill-white w-[40px] h-[40px]" /> */
+}
 const SongPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [play, { stop, pause, duration, sound }] = useSound(debussy);
@@ -75,8 +79,8 @@ const SongPlayer = () => {
   };
 
   return (
-    <div className=" bg-white h-[150px] flex items-center justify-between px-[100px] py-8">
-      <div className="flex items-center justify-start gap-2 font-sans text-center w-1/2">
+    <>
+      <div className="flex items-center justify-start gap-2 font-sans text-center w-[50%]">
         <SongDetails />
 
         <TimeControls
@@ -89,12 +93,14 @@ const SongPlayer = () => {
         />
         <MusicControls isPlaying={isPlaying} playingButton={playingButton} />
       </div>
-      {/* <div>
+
+      <div className="grid place-content-center h-[150px]">
         <div onClick={handleNavigate} className="cursor-pointer">
-          <AiFillHome className="w-[40px] h-[40px] fill-gray-800" />
+          {/* <AiFillHome className="w-[40px] h-[40px] fill-gray-800" /> */}
+          <BsFillPersonFill className="fill-gray-800 w-[40px] h-[40px]" />
         </div>
-      </div> */}
-    </div>
+      </div>
+    </>
   );
 };
 

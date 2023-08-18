@@ -4,6 +4,11 @@
 
 
 
+.main-body{
+  height: calc(100vh - 150px);
+}
+
+
 input[type=range].dual-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   pointer-events: all;

@@ -5,9 +5,12 @@ import SheetMusic from "../components/sheetMusic/SheetMusic";
 
 export default function Home() {
   return (
-    <div className="bg-blue-500 h-screen flex flex-col">
-      <SongPlayer />
-      <div className="flex grow min-h-0">
+    <div className=" h-screen">
+      <div className="h-[150px] bg-gray-200 flex items-center justify-between px-4">
+        <SongPlayer />
+      </div>
+
+      <div className="flex main-body">
         <SideBar />
         <SheetMusic />
       </div>
