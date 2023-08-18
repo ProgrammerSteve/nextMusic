@@ -79,28 +79,19 @@ const SongPlayer = () => {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-start gap-2 font-sans text-center w-[50%]">
-        <SongDetails />
+    <div className="flex items-center justify-start gap-2 font-sans text-center w-[50%]">
+      <SongDetails />
 
-        <TimeControls
-          currTime={currTime}
-          time={time}
-          seconds={seconds}
-          handleTimeBar={handleTimeBar}
-          sound={sound}
-          duration={duration}
-        />
-        <MusicControls isPlaying={isPlaying} playingButton={playingButton} />
-      </div>
-
-      <div className="grid place-content-center h-[150px]">
-        <div onClick={handleNavigate} className="cursor-pointer">
-          {/* <AiFillHome className="w-[40px] h-[40px] fill-gray-800" /> */}
-          <BsFillPersonFill className="fill-gray-800 w-[40px] h-[40px]" />
-        </div>
-      </div>
-    </>
+      <TimeControls
+        currTime={currTime}
+        time={time}
+        seconds={seconds}
+        handleTimeBar={handleTimeBar}
+        sound={sound}
+        duration={duration}
+      />
+      <MusicControls isPlaying={isPlaying} playingButton={playingButton} />
+    </div>
   );
 };
 
