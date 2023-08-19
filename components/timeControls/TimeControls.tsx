@@ -1,6 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { ChangeEvent } from "react";
+import type { Time } from "@/app/page";
+
+interface Props {
+  currTime: Time;
+  time: Time;
+  seconds: number;
+  handleTimeBar: (e: ChangeEvent<HTMLInputElement>) => void;
+  sound: any;
+  duration: number | null;
+}
 
 const TimeControls = ({
   currTime,
@@ -9,7 +19,7 @@ const TimeControls = ({
   seconds,
   handleTimeBar,
   sound,
-}) => {
+}: Props) => {
   return (
     <div className="grow">
       <div className="my-0 mx-auto w-[95%] flex justify-between text-[#828282] text-sm">
@@ -40,8 +50,7 @@ const TimeControls = ({
       <input
         type="range"
         min="0"
-        max={duration / 1000}
-        default="0"
+        max={duration ? duration : 0 / 1000}
         value={seconds}
         className="w-[95%] bg-[#27ae60]"
         onChange={handleTimeBar}
