@@ -15,8 +15,8 @@ const Sidebar = () => {
   return (
     <div className="sidebar bg-gray-800 text-white flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide">
       <div className="flex flex-col gap-4">
-        <SearchInput placeholder={"Enter song title"} />
-        <SearchInput placeholder={"Enter song author"} />
+        <SearchInput placeholder={"Enter song title"} type={"name"}/>
+        <SearchInput placeholder={"Enter song author"} type={"composer"}/>
       </div>
       <SongListItem />
     </div>

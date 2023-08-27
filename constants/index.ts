@@ -1,27 +1,102 @@
 export const classical_music_pieces = [
-  "Claude Debussy - Clair de Lune",
-  "Johann Sebastian Bach - Brandenburg Concertos",
-  "Antonio Vivaldi - The Four Seasons",
-  "George Frideric Handel - Messiah",
-  "Henry Purcell - Dido and Aeneas",
-  "Johann Pachelbel - Canon in D",
-  "Wolfgang Amadeus Mozart - Symphony No. 40 in G minor",
-  "Ludwig van Beethoven - Symphony No. 5 in C minor",
-  "Franz Joseph Haydn - String Quartet Op. 76, No. 3 'Emperor'",
-  "Wolfgang Amadeus Mozart - Piano Concerto No. 21 in C major",
-  "Ludwig van Beethoven - Piano Sonata No. 14 'Moonlight'",
-  "Pyotr Ilyich Tchaikovsky - Symphony No. 6 'Pathétique'",
-  "Franz Schubert - Symphony No. 8 'Unfinished'",
-  "Frédéric Chopin - Nocturnes",
-  "Johannes Brahms - Violin Concerto in D major",
-  "Giuseppe Verdi - La Traviata",
-  "Maurice Ravel - Boléro",
-  "Igor Stravinsky - The Rite of Spring",
-  "Béla Bartók - Concerto for Orchestra",
-  "Sergei Rachmaninoff - Piano Concerto No. 2",
-  "John Williams - Theme from 'Schindler's List'",
-  "Philip Glass - Glassworks",
-  "Arvo Pärt - Spiegel im Spiegel",
-  "Steve Reich - Music for 18 Musicians",
-  "Eric Whitacre - Lux Aurumque"
-]
+    {
+        composer: "Johann Sebastian Bach",
+        name: "Brandenburg Concertos"
+    },
+    {
+        composer: "Antonio Vivaldi",
+        name: "The Four Seasons"
+    },
+    {
+        composer: "George Frideric Handel",
+        name: "Messiah"
+    },
+    {
+        composer: "Henry Purcell",
+        name: "Dido and Aeneas"
+    },
+    {
+        composer: "Johann Pachelbel",
+        name: "Canon in D"
+    },
+    {
+        composer: "Wolfgang Amadeus Mozart",
+        name: "Symphony No. 40 in G minor"
+    },
+    {
+        composer: "Ludwig van Beethoven",
+        name: "Symphony No. 5 in C minor"
+    },
+    {
+        composer: "Franz Joseph Haydn",
+        name: "String Quartet Op. 76, No. 3 'Emperor'"
+    },
+    {
+        composer: "Wolfgang Amadeus Mozart",
+        name: "Piano Concerto No. 21 in C major"
+    },
+    {
+        composer: "Ludwig van Beethoven",
+        name: "Piano Sonata No. 14 'Moonlight'"
+    },
+    {
+        composer: "Pyotr Ilyich Tchaikovsky",
+        name: "Symphony No. 6 'Pathétique'"
+    },
+    {
+        composer: "Franz Schubert",
+        name: "Symphony No. 8 'Unfinished'"
+    },
+    {
+        composer: "Frédéric Chopin",
+        name: "Nocturnes"
+    },
+    {
+        composer: "Johannes Brahms",
+        name: "Violin Concerto in D major"
+    },
+    {
+        composer: "Giuseppe Verdi",
+        name: "La Traviata"
+    },
+    {
+        composer: "Claude Debussy",
+        name: "Clair de Lune"
+    },
+    {
+        composer: "Maurice Ravel",
+        name: "Boléro"
+    },
+    {
+        composer: "Igor Stravinsky",
+        name: "The Rite of Spring"
+    },
+    {
+        composer: "Béla Bartók",
+        name: "Concerto for Orchestra"
+    },
+    {
+        composer: "Sergei Rachmaninoff",
+        name: "Piano Concerto No. 2"
+    },
+    {
+        composer: "John Williams",
+        name: "Theme from 'Schindler\'s List'"
+    },
+    {
+        composer: "Philip Glass",
+        name: "Glassworks"
+    },
+    {
+        composer: "Arvo Pärt",
+        name: "Spiegel im Spiegel"
+    },
+    {
+        composer: "Steve Reich",
+        name: "Music for 18 Musicians"
+    },
+    {
+        composer: "Eric Whitacre",
+        name: "Lux Aurumque"
+    }
+];

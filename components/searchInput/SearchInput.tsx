@@ -15,9 +15,10 @@ import {Combobox, Transition} from '@headlessui/react'
 
 interface Props {
   placeholder: string;
+  type: "name" | "composer";
 }
 
-const SearchInput = ({ placeholder }: Props) => {
+const SearchInput = ({ placeholder, type }: Props) => {
 
 
   const [query, setQuery] = useState('')
@@ -26,7 +27,7 @@ const SearchInput = ({ placeholder }: Props) => {
     query === ''
     ? classical_music_pieces
     : classical_music_pieces.filter((piece) => {
-      return piece.toLowerCase().includes(query.toLowerCase())
+      return piece[type].toLowerCase().includes(query.toLowerCase())
     })
 
 
@@ -49,8 +50,8 @@ const SearchInput = ({ placeholder }: Props) => {
           >
             <Combobox.Options>
               {filteredPieces.map((piece) => (
-                <Combobox.Option key={piece} value={piece} className={({active}) => `relative search__option ${active ? 'text-white bg-blue-700' : 'text-gray-900 bg-white'}`} >
-                  {piece}
+                <Combobox.Option key={piece.name} value={piece.name} className={({active}) => `relative search__option ${active ? 'text-white bg-blue-700' : 'text-gray-900 bg-white'}`} >
+                  { type === 'name' ? `${piece.name} - ${piece.composer}` : `${piece.composer} - ${piece.name}` }
                 </Combobox.Option>
               ))}
             </Combobox.Options>
