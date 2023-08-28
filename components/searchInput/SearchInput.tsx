@@ -32,9 +32,9 @@ const SearchInput = ({ placeholder, type }: Props) => {
 
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col">
       <Combobox>
-        <div className="relative w-full">
+        <div className="relative">
           <Combobox.Input
             placeholder={placeholder}
             className="rounded-2xl pl-8 placeholder-black block h-[45px] leading-[45px] text-black"
@@ -48,7 +48,9 @@ const SearchInput = ({ placeholder, type }: Props) => {
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options>
+            <Combobox.Options
+              className='items-center w-[210px] mt-1 rounded'
+             >
               {filteredPieces.map((piece) => (
                 <Combobox.Option key={piece.name} value={piece.name} className={({active}) => `relative search__option ${active ? 'text-white bg-blue-700' : 'text-gray-900 bg-white'}`} >
                   { type === 'name' ? `${piece.name} - ${piece.composer}` : `${piece.composer} - ${piece.name}` }
