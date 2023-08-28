@@ -15,6 +15,11 @@
   width: 300px;
 }
 
+.search__option {
+  @apply cursor-default select-none py-2 pl-10 pr-4;
+}
+
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
