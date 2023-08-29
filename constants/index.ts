@@ -1,4 +1,9 @@
-export const classical_music_pieces = [
+export interface Piece {
+    composer: string;
+    name: string;
+}
+
+export const classical_music_pieces: Piece[] = [
     {
         composer: "Johann Sebastian Bach",
         name: "Brandenburg Concertos"

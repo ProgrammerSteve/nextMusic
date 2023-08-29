@@ -14,6 +14,8 @@ import { useState } from "react";
 import {Combobox, Transition} from '@headlessui/react'
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { bindActionCreators } from "redux";
+import { selectSong } from "@/store/music/music.action";
 
 interface Props {
   placeholder: string;
@@ -22,10 +24,11 @@ interface Props {
 
 const SearchInput = ({ placeholder, type }: Props) => {
 
-  // const dispatch = useDispatch()
-  // const state = useSelector((state: RootState) => {
-  //   return state.music;
-  // })
+  const dispatch = useDispatch()
+  const state = useSelector((state: RootState) => {
+    return state.music;
+  })
+
 
 
   const [query, setQuery] = useState('')
@@ -40,7 +43,7 @@ const SearchInput = ({ placeholder, type }: Props) => {
 
   return (
     <div className="flex flex-col">
-      <Combobox>
+      <Combobox value={{name: '', composer: ''}} onChange={(e) => dispatch(selectSong(e))}>
         <div className="relative">
           <Combobox.Input
             placeholder={placeholder}
@@ -59,7 +62,7 @@ const SearchInput = ({ placeholder, type }: Props) => {
               className='items-center w-[210px] mt-1 rounded'
              >
               {filteredPieces.map((piece) => (
-                <Combobox.Option key={piece.name} value={piece.name} className={({active}) => `relative search__option ${active ? 'text-white bg-blue-700' : 'text-gray-900 bg-white'}`} >
+                <Combobox.Option key={piece.name} value={piece} className={({active}) => `relative search__option ${active ? 'text-white bg-blue-700' : 'text-gray-900 bg-white'}`} >
                   { type === 'name' ? `${piece.name} - ${piece.composer}` : `${piece.composer} - ${piece.name}` }
                 </Combobox.Option>
               ))}
