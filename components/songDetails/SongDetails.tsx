@@ -1,6 +1,13 @@
+import { RootState } from "@/store/store";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const SongDetails = () => {
+
+  const music = useSelector((state: RootState) => {
+    return state.music
+  })
+
   return (
     <div className="flex py-2 rounded-lg ">
       <div>
