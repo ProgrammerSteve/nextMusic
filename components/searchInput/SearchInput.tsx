@@ -12,6 +12,8 @@ import { RxLetterCaseCapitalize } from "react-icons/rx";
 import { classical_music_pieces } from "@/constants";
 import { useState } from "react";
 import {Combobox, Transition} from '@headlessui/react'
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 interface Props {
   placeholder: string;
@@ -19,6 +21,11 @@ interface Props {
 }
 
 const SearchInput = ({ placeholder, type }: Props) => {
+
+  // const dispatch = useDispatch()
+  // const state = useSelector((state: RootState) => {
+  //   return state.music;
+  // })
 
 
   const [query, setQuery] = useState('')
