@@ -16,6 +16,9 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [play, { stop, pause, duration, sound }] = useSound(debussy);
   const [seconds, setSeconds] = useState(0);
+  const [isSidebarShown, setIsSidebarShown] = useState(false);
+
+  const handleToggleSidebar = () => setIsSidebarShown(!isSidebarShown);
 
   const [currTime, setCurrTime] = useState({
     min: 0,
@@ -57,8 +60,10 @@ export default function Home() {
       pause(); // this will pause the audio
       setIsPlaying(false);
     } else {
-      play(); // this will play the audio
-      setIsPlaying(true);
+      if (sound) {
+        play(); // this will play the audio
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -83,10 +88,11 @@ export default function Home() {
         duration={duration}
         isPlaying={isPlaying}
         playingButton={playingButton}
+        handleToggleSidebar={handleToggleSidebar}
       />
 
       <div className="flex main-body">
-        <SideBar />
+        <SideBar isSidebarShown={isSidebarShown} />
         <SheetMusic />
       </div>
     </div>
