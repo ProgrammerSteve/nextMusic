@@ -21,7 +21,7 @@ const TimeControls = ({
   sound,
 }: Props) => {
   return (
-    <div className="grow">
+    <div className="w-[90%] md:w-auto grow-0 md:grow">
       <div className="my-0 mx-auto w-[95%] flex justify-between text-[#828282] text-sm">
         <p>
           {currTime.min.toLocaleString("en-US", {

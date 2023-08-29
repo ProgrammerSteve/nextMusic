@@ -17,33 +17,25 @@ const MusicControls = ({ isPlaying, playingButton }: Props) => {
   return (
     <div>
       <button className="bg-none border-0 items-center justify-center">
-        <IconContext.Provider value={{ size: "3em", color: color }}>
-          <BiSkipPrevious />
-        </IconContext.Provider>
+        <BiSkipPrevious className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
       </button>
       {!isPlaying ? (
         <button
           className="bg-none border-0 items-center justify-center"
           onClick={playingButton}
         >
-          <IconContext.Provider value={{ size: "3em", color: color }}>
-            <AiFillPlayCircle />
-          </IconContext.Provider>
+          <AiFillPlayCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
         </button>
       ) : (
         <button
           className="bg-none border-0 items-center justify-center"
           onClick={playingButton}
         >
-          <IconContext.Provider value={{ size: "3em", color: color }}>
-            <AiFillPauseCircle />
-          </IconContext.Provider>
+          <AiFillPauseCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
         </button>
       )}
       <button className="bg-none border-0 items-center justify-center">
-        <IconContext.Provider value={{ size: "3em", color: color }}>
-          <BiSkipNext />
-        </IconContext.Provider>
+        <BiSkipNext className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
       </button>
     </div>
   );
