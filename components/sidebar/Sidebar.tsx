@@ -10,16 +10,32 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
 
+interface Props {
+  isSidebarShown: boolean;
+}
+
 import SongListItem from "@/components/songListItem/SongListItem";
-const Sidebar = () => {
+const Sidebar = ({ isSidebarShown }: Props) => {
   return (
-    <div className="sidebar bg-gray-800 text-white flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide">
-      <div className="flex flex-col gap-4">
-        <SearchInput placeholder={"Enter song title"} type={"name"}/>
-        <SearchInput placeholder={"Enter song author"} type={"composer"}/>
+    <>
+      <div className="sidebar h-screen md:h-full bg-gray-800 text-white hidden md:flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0">
+        <div className="flex flex-col gap-4">
+          <SearchInput placeholder={"Enter song title"} type={"name"} />
+          <SearchInput placeholder={"Enter song author"} type={"composer"} />
+        </div>
+        <SongListItem />
       </div>
-      <SongListItem />
-    </div>
+
+      {isSidebarShown && (
+        <div className="sidebar h-screen md:h-full bg-gray-800 text-white flex md:hidden flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0">
+          <div className="flex flex-col gap-4">
+            <SearchInput placeholder={"Enter song title"} type={"name"} />
+            <SearchInput placeholder={"Enter song author"} type={"composer"} />
+          </div>
+          <SongListItem />
+        </div>
+      )}
+    </>
   );
 };
 
