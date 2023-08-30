@@ -1,133 +1,109 @@
 export interface Piece {
     composer: string;
     name: string;
-    songUrl: string;
+    songUrl?: string;
+    
 }
 
 export const classical_music_pieces: Piece[] = [
     {
         composer: "Johann Sebastian Bach",
-        name: "Brandenburg Concertos",
-        songUrl: "Brandenburg_Concertos.mp3"
+        name: "Brandenburg Concertos"
     },
     {
         composer: "Antonio Vivaldi",
-        name: "The Four Seasons",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "The Four Seasons"
     },
     {
         composer: "George Frideric Handel",
-        name: "Messiah",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Messiah"
     },
     {
         composer: "Henry Purcell",
-        name: "Dido and Aeneas",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Dido and Aeneas"
     },
     {
         composer: "Johann Pachelbel",
-        name: "Canon in D",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Canon in D"
     },
     {
         composer: "Wolfgang Amadeus Mozart",
-        name: "Symphony No. 40 in G minor",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Symphony No. 40 in G minor"
     },
     {
         composer: "Ludwig van Beethoven",
-        name: "Symphony No. 5 in C minor",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Symphony No. 5 in C minor"
     },
     {
         composer: "Franz Joseph Haydn",
-        name: "String Quartet Op. 76, No. 3 'Emperor'",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "String Quartet Op. 76, No. 3 'Emperor'"
     },
     {
         composer: "Wolfgang Amadeus Mozart",
-        name: "Piano Concerto No. 21 in C major",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Piano Concerto No. 21 in C major"
     },
     {
         composer: "Ludwig van Beethoven",
-        name: "Piano Sonata No. 14 'Moonlight'",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Piano Sonata No. 14 'Moonlight'"
     },
     {
         composer: "Pyotr Ilyich Tchaikovsky",
-        name: "Symphony No. 6 'Pathétique'",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Symphony No. 6 'Pathétique'"
     },
     {
         composer: "Franz Schubert",
-        name: "Symphony No. 8 'Unfinished'",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Symphony No. 8 'Unfinished'"
     },
     {
         composer: "Frédéric Chopin",
-        name: "Nocturnes",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Nocturnes"
     },
     {
         composer: "Johannes Brahms",
-        name: "Violin Concerto in D major",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Violin Concerto in D major"
     },
     {
         composer: "Giuseppe Verdi",
-        name: "La Traviata",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "La Traviata"
     },
     {
         composer: "Claude Debussy",
-        name: "Clair de Lune",
-        songUrl: "Claire_De_Luna.mp3"
+        name: "Clair de Lune"
     },
     {
         composer: "Maurice Ravel",
-        name: "Boléro",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Boléro"
     },
     {
         composer: "Igor Stravinsky",
-        name: "The Rite of Spring",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "The Rite of Spring"
     },
     {
         composer: "Béla Bartók",
-        name: "Concerto for Orchestra",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Concerto for Orchestra"
     },
     {
         composer: "Sergei Rachmaninoff",
-        name: "Piano Concerto No. 2",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Piano Concerto No. 2"
     },
     {
         composer: "John Williams",
-        name: "Theme from 'Schindler\'s List'",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Theme from 'Schindler\'s List'"
     },
     {
         composer: "Philip Glass",
-        name: "Glassworks",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Glassworks"
     },
     {
         composer: "Arvo Pärt",
-        name: "Spiegel im Spiegel",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Spiegel im Spiegel"
     },
     {
         composer: "Steve Reich",
-        name: "Music for 18 Musicians",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Music for 18 Musicians"
     },
     {
         composer: "Eric Whitacre",
-        name: "Lux Aurumque",
-        songUrl: "Mozart_Piano_Sonata.mp3"
+        name: "Lux Aurumque"
     }
 ];

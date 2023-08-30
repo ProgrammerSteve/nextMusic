@@ -3,10 +3,9 @@
 import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
 import React, { useEffect, useState, ChangeEvent } from "react";
+import debussy from "../public/music/Claire_De_Luna.mp3";
 import useSound from "use-sound";
 import NavBar from "../components/navBar/NavBar";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 
 export type Time = {
   min: number;
@@ -14,16 +13,8 @@ export type Time = {
 };
 
 export default function Home() {
-
-
-  const music = useSelector((state: RootState) => {
-    return state.music;
-  })
-
-  const musicFilePath = '/_next/static/music/'
-  const musicFileName = music.piece.songUrl;
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, pause, duration, sound }] = useSound(musicFilePath + musicFileName);
+  const [play, { stop, pause, duration, sound }] = useSound(debussy);
   const [seconds, setSeconds] = useState(0);
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
