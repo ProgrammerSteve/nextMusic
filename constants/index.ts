@@ -2,6 +2,7 @@ export interface Piece {
     composer: string;
     name: string;
     songUrl?: string;
+    
 }
 
 export const classical_music_pieces: Piece[] = [
