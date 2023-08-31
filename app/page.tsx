@@ -59,6 +59,7 @@ export default function Home() {
   }, [sound]);
 
   const playingButton = () => {
+    console.log(path)
     if (isPlaying) {
       pause(); // this will pause the audio
       setIsPlaying(false);
