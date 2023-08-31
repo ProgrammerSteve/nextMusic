@@ -3,7 +3,7 @@
 import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
 import React, { useEffect, useState, ChangeEvent } from "react";
-// import debussy from "../public/music/Claire_De_Luna.mp3";
+import debussy from "../public/music/Claire_De_Luna.mp3";
 import useSound from "use-sound";
 import NavBar from "../components/navBar/NavBar";
 
@@ -17,7 +17,7 @@ export default function Home() {
 
   const path = '/_next/static/music/Claire_De_Luna.mp3'
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, pause, duration, sound }] = useSound(path);
+  const [play, { stop, pause, duration, sound }] = useSound(debussy);
   const [seconds, setSeconds] = useState(0);
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
@@ -59,7 +59,9 @@ export default function Home() {
   }, [sound]);
 
   const playingButton = () => {
+    console.log(debussy)
     console.log(path)
+    console.log(debussy === path)
     if (isPlaying) {
       pause(); // this will pause the audio
       setIsPlaying(false);
