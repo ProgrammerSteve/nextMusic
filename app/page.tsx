@@ -3,7 +3,7 @@
 import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
 import React, { useEffect, useState, ChangeEvent } from "react";
-import debussy from "../public/music/Claire_De_Luna.mp3";
+// import debussy from "../public/music/Claire_De_Luna.mp3";
 import useSound from "use-sound";
 import NavBar from "../components/navBar/NavBar";
 
@@ -13,8 +13,11 @@ export type Time = {
 };
 
 export default function Home() {
+
+
+  const path = '/_next/static/music/Claire_De_Luna.mp3'
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, pause, duration, sound }] = useSound(debussy);
+  const [play, { stop, pause, duration, sound }] = useSound(path);
   const [seconds, setSeconds] = useState(0);
   const [isSidebarShown, setIsSidebarShown] = useState(false);
 
