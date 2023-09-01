@@ -1,38 +1,42 @@
-import { compose, createStore, applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware, AnyAction, Store, Middleware } from 'redux';
 import { createLogger, ReduxLoggerOptions } from 'redux-logger';
-import { persistStore, persistReducer } from 'redux-persist';
+
 import thunk from 'redux-thunk';
 import { rootReducer } from './root-reducer';
 import { batchDispatchMiddleware } from 'redux-batched-actions';
-import storage from 'redux-persist/lib/storage';
+
+import { createWrapper, HYDRATE, Context } from 'next-redux-wrapper';
+
 export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch;
+
+
+// BINDING MIDDLEWARE
+const bindMiddleware = (middleware: Middleware[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    const { composeWithDevTools } = require('redux-devtools-extension');
+    return composeWithDevTools(applyMiddleware(...middleware));
+  }
+  return applyMiddleware(...middleware);
+};
 
 let reduxLoggerOptions: ReduxLoggerOptions = {
   predicate: (getState, action) => action,
   collapsed: true
-
 };
-
 const loggerMiddleware = createLogger(reduxLoggerOptions);
+
 const middleWares = [
   thunk,
   batchDispatchMiddleware,
-  // loggerMiddleware
+  loggerMiddleware
 ].filter(Boolean);
 
-const persistConfig = {
-  key: 'root',
-  storage: storage,
-  blackList: [],
+export const store = createStore(rootReducer, bindMiddleware(middleWares));
+
+// Create the store using the persisted reducer and middleware
+export const makeStore = (context: Context): Store => {
+  return createStore(rootReducer, bindMiddleware(middleWares));
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-const composedEnhancers = compose(applyMiddleware(...middleWares));
-
-export const store = createStore(
-  persistedReducer,
-  undefined,
-  composedEnhancers
-);
-
-export const persistor = persistStore(store);
+export const wrapper = createWrapper<Store<RootState>>(makeStore, { debug: true });

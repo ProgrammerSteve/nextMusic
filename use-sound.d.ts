@@ -37,7 +37,7 @@ declare module 'use-sound' {
 
   type UseSoundTuple = [PlayFunction, PlayExposedData];
 
-  const useSound: (src: string, options?: HookOptions) => UseSoundTuple;
+  const useSound: (src: string | null, options?: HookOptions) => UseSoundTuple;
 
   export default useSound;
 }
