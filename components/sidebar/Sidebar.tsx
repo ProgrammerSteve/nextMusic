@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import SearchInput from "@/components/searchInput/SearchInput";
+import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
+import { songList } from "@/store/music/music.types";
 import { AiFillHome } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";
 import { HiMagnifyingGlass } from "react-icons/hi2";
@@ -23,7 +25,9 @@ const Sidebar = ({ isSidebarShown }: Props) => {
           <SearchInput placeholder={"Enter song title"} type={"name"} />
           <SearchInput placeholder={"Enter song author"} type={"composer"} />
         </div>
-        <SongListItem />
+        {songList.map((songObj) => (
+          <SongListItem songObj={songObj} key={songObj.songID} />
+        ))}
       </div>
 
       {isSidebarShown && (
@@ -32,7 +36,9 @@ const Sidebar = ({ isSidebarShown }: Props) => {
             <SearchInput placeholder={"Enter song title"} type={"name"} />
             <SearchInput placeholder={"Enter song author"} type={"composer"} />
           </div>
-          <SongListItem />
+          {songList.map((songObj) => (
+            <SongListItem songObj={songObj} key={songObj.songID} />
+          ))}
         </div>
       )}
     </>

@@ -1,12 +1,11 @@
 import { RootState } from "@/store/store";
 import React from "react";
-import { useSelector } from "react-redux";
+
+import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
+import { selectSongObj } from "@/store/music/music.selector";
 
 const SongDetails = () => {
-
-  const music = useSelector((state: RootState) => {
-    return state.music
-  })
+  const songObj = useAppSelector(selectSongObj);
 
   return (
     <div className="flex py-2 rounded-lg ">
@@ -18,9 +17,11 @@ const SongDetails = () => {
       </div>
       <div className="flex flex-col justify-center ml-2">
         <h3 className="text-base sm:text-xl md:text-3xl text-[#564d4d] font-bold">
-          {music.piece ? music.piece.name : ''}
+          {songObj ? songObj.name : ""}
         </h3>
-        <p className="text-sm sm:text-base text-[#959292]">{music.piece ? music.piece.composer : ''}</p>
+        <p className="text-sm sm:text-base text-[#959292]">
+          {songObj ? songObj.composer : ""}
+        </p>
       </div>
     </div>
   );
