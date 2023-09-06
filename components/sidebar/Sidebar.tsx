@@ -36,6 +36,7 @@ const Sidebar = ({ isSidebarShown }: Props) => {
             <SearchInput placeholder={"Enter song title"} type={"name"} />
             <SearchInput placeholder={"Enter song author"} type={"composer"} />
           </div>
+
           {songList.map((songObj) => (
             <SongListItem songObj={songObj} key={songObj.songID} />
           ))}
