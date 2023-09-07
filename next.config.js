@@ -25,10 +25,15 @@ const nextConfig = {
             esModule: false,
           },
         },
+      },
+      {
+        test: /\.node$/,
+        use: "raw-loader",
       }
     );
     return config;
   },
+  swcMinify: false,
 };
 
 module.exports = nextConfig;
