@@ -105,7 +105,10 @@ export default function Home() {
       />
 
       <div className="flex main-body">
-        <SideBar isSidebarShown={isSidebarShown} />
+        <SideBar
+          isSidebarShown={isSidebarShown}
+          handleToggleSidebar={handleToggleSidebar}
+        />
         <SheetMusic />
       </div>
     </div>
