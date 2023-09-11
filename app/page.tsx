@@ -3,12 +3,11 @@
 import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
 import React, { useEffect, useState, ChangeEvent } from "react";
-import useSound from "use-sound";
 import NavBar from "../components/navBar/NavBar";
+import { Howl, Howler } from "howler";
 import { songList } from "@/store/music/music.types";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
-import * as path from "path";
 
 export type Time = {
   min: number;
@@ -19,20 +18,15 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const songObj = useAppSelector(selectSongObj);
   // const songUrl = path.join(__dirname, "..", songObj?.songUrl || "");
-
   useEffect(() => {
     console.log("songObj:", songObj);
   }, []);
-
   const [isPlaying, setIsPlaying] = useState(false);
-  const [play, { stop, pause, duration, sound }] = useSound(
-    songObj?.songUrl || null
-  );
+  const [sound, setSound] = useState<Howl | null>(null);
+  const [duration, setDuration] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isSidebarShown, setIsSidebarShown] = useState(false);
-
   const handleToggleSidebar = () => setIsSidebarShown(!isSidebarShown);
-
   const [currTime, setCurrTime] = useState({
     min: 0,
     sec: 0,
@@ -43,49 +37,69 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const sec = duration ? duration / 1000 : 0;
-    const min = Math.floor(sec / 60);
-    const secRemain = Math.floor(sec - min * 60);
-    const time = {
-      min: min,
-      sec: secRemain,
-    };
-    setTime(time);
-  }, [sound]);
+    const songUrl = songObj?.songUrl || "";
+    // Initialize the Howl instance
+    const newSound = new Howl({
+      src: [songUrl],
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (sound) {
-        setSeconds(sound.seek([])); // setting the seconds state with the current state
-        const min = Math.floor(sound.seek([]) / 60);
-        const sec = Math.floor(sound.seek([]) % 60);
-        setCurrTime({
-          min,
-          sec,
+      onplay: () => {
+        setIsPlaying(true);
+        setDuration(newSound.duration());
+        const updateInterval = setInterval(() => {
+          const seekTime = newSound.seek();
+          setSeconds(Math.floor(seekTime));
+          const min = Math.floor(seekTime / 60);
+          const sec = Math.floor(seekTime % 60);
+          setCurrTime({ min, sec });
+        }, 1000);
+        newSound.on("end", () => {
+          setIsPlaying(false);
+          clearInterval(updateInterval);
         });
+        newSound.on("pause", () => {
+          clearInterval(updateInterval);
+        });
+      },
+      onpause: () => {
+        setIsPlaying(false);
+      },
+      onend: () => {
+        setIsPlaying(false);
+      },
+    });
+    setSound(newSound);
+
+    return () => {
+      if (newSound) {
+        newSound.stop();
+        newSound.unload();
+        setSeconds(0);
+        setDuration(0);
+        setCurrTime({ min: 0, sec: 0 });
       }
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [sound]);
+    };
+  }, [songObj]);
 
   const playingButton = () => {
-    if (isPlaying) {
-      pause(); // this will pause the audio
-      setIsPlaying(false);
-    } else {
-      if (sound) {
-        play(); // this will play the audio
-        setIsPlaying(true);
+    if (sound) {
+      if (isPlaying) {
+        sound.pause();
+      } else {
+        sound.play();
       }
     }
   };
 
   const handleTimeBar = (e: ChangeEvent<HTMLInputElement>) => {
-    if (sound) sound.seek([Number(e.target.value)]);
+    if (sound) {
+      const seekTime = (Number(e.target.value) / 100) * sound.duration();
+      sound.seek(seekTime);
+    }
   };
 
   const handleNavigate = async () => {
-    await stop();
+    sound?.stop();
+    sound?.unload();
     console.log("");
   };
 
