@@ -17,6 +17,7 @@
     "canvas": "^2.11.2",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
+    "howler": "^2.2.3",
     "next": "13.4.16",
     "next-redux-wrapper": "^8.1.0",
     "postcss": "8.4.28",
@@ -37,6 +38,7 @@
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
+    "@types/howler": "^2.2.8",
     "@types/redux": "^3.6.0",
     "@types/redux-batched-actions": "^0.1.5",
     "@types/redux-logger": "^3.0.9",
