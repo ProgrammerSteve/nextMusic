@@ -52,7 +52,7 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
           >
             <AiOutlineClose
               onClick={handleToggleSidebar}
-              className="text-[4em] sm:text-[5em] md:text-[5em] mt-2 mr-2 text-[#dedee2] cursor-pointer select-none"
+              className="text-[2em] sm:text-[3em] md:text-[4em] mt-2 mr-2 text-[#dedee2] cursor-pointer select-none"
             />
           </div>
         </>
