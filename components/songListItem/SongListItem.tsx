@@ -20,7 +20,7 @@ const SongListItem = ({ songObj }: Props) => {
   return (
     <div
       onClick={handleClick}
-      className={`flex mt-3 w-full py-2 px-2 rounded-lg ${
+      className={`flex mt-3 w-full py-2 px-2 rounded-lg cursor-pointer  ${
         selectedSongID === songObj.songID ? "bg-gray-600" : "bg-gray-900"
       }`}
     >
