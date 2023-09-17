@@ -41,6 +41,7 @@ export default function Home() {
     // Initialize the Howl instance
     const newSound = new Howl({
       src: [songUrl],
+      html5: true,
 
       onplay: () => {
         setIsPlaying(true);

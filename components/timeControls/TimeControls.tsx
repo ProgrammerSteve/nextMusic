@@ -52,7 +52,7 @@ const TimeControls = ({
         min="0"
         max={duration ? duration : 0 / 1000}
         value={seconds}
-        className="w-[95%] bg-[#27ae60]"
+        className="w-[95%] bg-[#27ae60] cursor-pointer"
         onChange={handleTimeBar}
       />
     </div>

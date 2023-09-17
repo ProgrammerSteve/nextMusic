@@ -2,6 +2,7 @@
 // #view=fitH  is for fit Horizaontal
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs, DocumentProps } from "react-pdf";
+// import "react-pdf/dist/esm/Page/TextLayer.css";
 // import clairDeLune from "../../public/pdfs/debussyclairdelune.pdf";
 import { useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
@@ -19,6 +20,11 @@ const SheetMusic = () => {
   const [pageScale, setPageScale] = useState(1);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
+
+  useEffect(() => {
+    setPageNumber(1);
+    setPageScale(1);
+  }, [songObj]);
 
   const onDocumentLoadSuccess = (document: any) => {
     if (!document) return;
@@ -58,7 +64,7 @@ const SheetMusic = () => {
   }, []);
 
   return (
-    <div className="h-[100%] w-full md:w-auto grow-0 md:grow bg-gray-900 overflow-clip">
+    <div className="h-[100%] w-full md:w-auto grow-0 md:grow bg-gray-900 flex flex-col">
       {/* <object
         className="w-[100%] h-[100%]"
         type="application/pdf"
@@ -89,11 +95,17 @@ const SheetMusic = () => {
       </nav>
 
       <Document
-        className=" page"
+        className="h-auto page overflow-clip"
         file={`${songObj.pdfUrl}`}
         onLoadSuccess={onDocumentLoadSuccess}
       >
-        <Page scale={pageScale} pageNumber={pageNumber} />
+        <Page
+          className="overflow-scroll scrollbar-hide"
+          scale={pageScale}
+          pageNumber={pageNumber}
+          renderTextLayer={false}
+          renderAnnotationLayer={false}
+        />
       </Document>
     </div>
   );
