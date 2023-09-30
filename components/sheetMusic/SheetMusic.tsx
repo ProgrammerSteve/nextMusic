@@ -64,7 +64,7 @@ const SheetMusic = () => {
   }, []);
 
   return (
-    <div className="h-[100%] w-full md:w-auto grow-0 md:grow bg-gray-900 flex flex-col">
+    <div className="h-[100%] w-full md:w-auto flex-[0] md:grow bg-gray-900 flex flex-col overflow-clip">
       {/* <object
         className="w-[100%] h-[100%]"
         type="application/pdf"
@@ -77,27 +77,36 @@ const SheetMusic = () => {
         title="Sheet Music"
       ></iframe> */}
       <nav className="bg-gray-950 text-white flex gap-5">
-        <p>
+        <p className="select-none">
           Page {pageNumber || 1} of {numPages || 1}
         </p>
-        <button onClick={goToPrevPage} className="previous">
+        <button onClick={goToPrevPage} className="previous select-none">
           Prev
         </button>
-        <button onClick={goToNextPage} className="next">
+        <button onClick={goToNextPage} className="next select-none">
           Next
         </button>
-        <button onClick={handleZoomIn} disabled={pageScale >= 3}>
+        <button
+          className="select-none"
+          onClick={handleZoomIn}
+          disabled={pageScale >= 3}
+        >
           Zoom +
         </button>
-        <button onClick={handleZoomOut} disabled={pageScale <= 0.3}>
+        <button
+          className="select-none"
+          onClick={handleZoomOut}
+          disabled={pageScale <= 0.3}
+        >
           Zoom -
         </button>
       </nav>
 
       <Document
-        className="h-auto page overflow-clip"
+        className="h-auto page scrollbar-hide"
         file={`${songObj.pdfUrl}`}
         onLoadSuccess={onDocumentLoadSuccess}
+        loading={LoadingComponent}
       >
         <Page
           className="overflow-scroll scrollbar-hide"
@@ -112,3 +121,12 @@ const SheetMusic = () => {
 };
 
 export default SheetMusic;
+
+const LoadingComponent = () => {
+  return (
+    <div className="h-full flex flex-col pt-8 justify-center items-center">
+      <span className="text-white text-2xl">Loading...</span>
+      <img className="h-[100px] w-[100px] animate-spin" src="/loading.svg" />
+    </div>
+  );
+};

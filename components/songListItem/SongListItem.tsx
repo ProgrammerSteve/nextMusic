@@ -25,7 +25,10 @@ const SongListItem = ({ songObj }: Props) => {
       }`}
     >
       <div>
-        <img className="rounded-[10%]" src="https://picsum.photos/80/50" />
+        <img
+          className="rounded-[10%] h-[50px] w-[80px]"
+          src={songObj.imageUrl ?? "https://picsum.photos/80/50"}
+        />
       </div>
       <div className="flex flex-col justify-center ml-2">
         <h3
