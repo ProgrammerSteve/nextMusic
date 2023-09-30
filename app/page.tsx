@@ -119,7 +119,7 @@ export default function Home() {
         handleToggleSidebar={handleToggleSidebar}
       />
 
-      <div className="flex main-body">
+      <div className="flex main-body overflow-clip">
         <SideBar
           isSidebarShown={isSidebarShown}
           handleToggleSidebar={handleToggleSidebar}
