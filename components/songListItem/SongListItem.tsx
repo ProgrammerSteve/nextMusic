@@ -10,12 +10,14 @@ import { selectSongObjID } from "@/store/music/music.selector";
 
 interface Props {
   songObj: SongObject;
+  closeSideBar: () => void;
 }
-const SongListItem = ({ songObj }: Props) => {
+const SongListItem = ({ songObj, closeSideBar }: Props) => {
   const selectedSongID = useAppSelector(selectSongObjID);
   const dispatch = useAppDispatch();
   const handleClick = () => {
     dispatch(loadSongById(songObj.songID));
+    closeSideBar();
   };
   return (
     <div

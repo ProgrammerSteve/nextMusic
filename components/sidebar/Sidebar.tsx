@@ -19,6 +19,11 @@ interface Props {
 
 import SongListItem from "@/components/songListItem/SongListItem";
 const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
+  const closeSideBar = () => {
+    setTimeout(() => {
+      isSidebarShown && handleToggleSidebar();
+    }, 250);
+  };
   return (
     <>
       <div className="sidebar h-screen md:h-full bg-gray-800 text-white hidden md:flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0  z-50">
@@ -27,7 +32,11 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
           <SearchInput placeholder={"Enter song author"} type={"composer"} />
         </div>
         {songList.map((songObj) => (
-          <SongListItem songObj={songObj} key={songObj.songID} />
+          <SongListItem
+            songObj={songObj}
+            key={songObj.songID}
+            closeSideBar={closeSideBar}
+          />
         ))}
       </div>
 
@@ -43,7 +52,11 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
             </div>
 
             {songList.map((songObj) => (
-              <SongListItem songObj={songObj} key={songObj.songID} />
+              <SongListItem
+                songObj={songObj}
+                key={songObj.songID}
+                closeSideBar={closeSideBar}
+              />
             ))}
           </div>
           <div
