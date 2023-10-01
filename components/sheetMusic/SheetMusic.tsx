@@ -64,7 +64,7 @@ const SheetMusic = () => {
   }, []);
 
   return (
-    <div className="h-[100%] w-full md:w-auto flex-[0] md:grow bg-gray-900 flex flex-col overflow-clip">
+    <div className="h-[100%] w-full md:w-auto flex-grow-[0] md:flex-grow-[1] bg-gray-900 flex flex-col overflow-clip">
       {/* <object
         className="w-[100%] h-[100%]"
         type="application/pdf"
@@ -125,7 +125,7 @@ export default SheetMusic;
 const LoadingComponent = () => {
   return (
     <div className="h-full flex flex-col pt-8 justify-center items-center">
-      <span className="text-white text-2xl">Loading...</span>
+      <span className="text-white text-2xl mb-4">Loading...</span>
       <img className="h-[100px] w-[100px] animate-spin" src="/loading.svg" />
     </div>
   );
