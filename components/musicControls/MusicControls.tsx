@@ -10,10 +10,11 @@ const color = "#50505d";
 
 interface Props {
   isPlaying: boolean;
+  isLoaded: boolean;
   playingButton: () => void;
 }
 
-const MusicControls = ({ isPlaying, playingButton }: Props) => {
+const MusicControls = ({ isPlaying, playingButton, isLoaded }: Props) => {
   return (
     <div>
       <button className="bg-none border-0 items-center justify-center">
@@ -21,8 +22,9 @@ const MusicControls = ({ isPlaying, playingButton }: Props) => {
       </button>
       {!isPlaying ? (
         <button
-          className="bg-none border-0 items-center justify-center"
+          className="bg-none border-0 items-center justify-center disabled:bg-red-500"
           onClick={playingButton}
+          disabled={!isLoaded}
         >
           <AiFillPlayCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
         </button>

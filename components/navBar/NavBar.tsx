@@ -5,6 +5,7 @@ import MusicControls from "../musicControls/MusicControls";
 import React, { ChangeEvent } from "react";
 import type { Time } from "@/app/page";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Howl } from "howler";
 
 interface Props {
   handleNavigate: () => void;
@@ -13,9 +14,10 @@ interface Props {
   time: Time;
   seconds: number;
   handleTimeBar: (e: ChangeEvent<HTMLInputElement>) => void;
-  sound: any;
+  sound: Howl | null;
   duration: number | null;
   isPlaying: boolean;
+  isLoaded: boolean;
   playingButton: () => void;
 }
 
@@ -28,9 +30,15 @@ const NavBar = ({
   sound,
   duration,
   isPlaying,
+  isLoaded,
   playingButton,
   handleToggleSidebar,
 }: Props) => {
+  const handleSeek = () => {
+    if (!sound) return;
+    sound.seek(4000, 1);
+  };
+
   return (
     <div className="navbar bg-gray-200 flex items-center justify-start px-4">
       <div className="flex flex-col md:flex-row items-center justify-start gap-2 font-sans text-center w-[100%]">
@@ -43,7 +51,11 @@ const NavBar = ({
 
         <div className="flex items-center justify-between w-[90%] md:w-auto">
           <SongDetails />
-          <MusicControls isPlaying={isPlaying} playingButton={playingButton} />
+          <MusicControls
+            isPlaying={isPlaying}
+            isLoaded={isLoaded}
+            playingButton={playingButton}
+          />
         </div>
 
         <TimeControls
