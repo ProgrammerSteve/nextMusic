@@ -2,13 +2,14 @@
 
 import React, { ChangeEvent } from "react";
 import type { Time } from "@/app/page";
+import { Howl } from "howler";
 
 interface Props {
   currTime: Time;
   time: Time;
   seconds: number;
   handleTimeBar: (e: ChangeEvent<HTMLInputElement>) => void;
-  sound: any;
+  sound: Howl | null;
   duration: number | null;
 }
 

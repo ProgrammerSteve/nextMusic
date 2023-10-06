@@ -22,6 +22,8 @@ export default function Home() {
     console.log("songObj:", songObj);
   }, []);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [seekId, setSeekId] = useState<number>(0);
   const [sound, setSound] = useState<Howl | null>(null);
   const [duration, setDuration] = useState(0);
   const [seconds, setSeconds] = useState(0);
@@ -43,11 +45,12 @@ export default function Home() {
       src: [songUrl],
       html5: true,
 
-      onplay: () => {
+      onplay: (id) => {
         setIsPlaying(true);
+        setSeekId(id);
         setDuration(newSound.duration());
         const updateInterval = setInterval(() => {
-          const seekTime = newSound.seek();
+          const seekTime = newSound.seek(id);
           setSeconds(Math.floor(seekTime));
           const min = Math.floor(seekTime / 60);
           const sec = Math.floor(seekTime % 60);
@@ -66,6 +69,9 @@ export default function Home() {
       },
       onend: () => {
         setIsPlaying(false);
+      },
+      onload: (id) => {
+        setIsLoaded(true);
       },
     });
     setSound(newSound);
@@ -93,8 +99,7 @@ export default function Home() {
 
   const handleTimeBar = (e: ChangeEvent<HTMLInputElement>) => {
     if (sound) {
-      const seekTime = (Number(e.target.value) / 100) * sound.duration();
-      sound.seek(seekTime);
+      sound.seek(Number(e.target.value), seekId);
     }
   };
 
@@ -115,6 +120,7 @@ export default function Home() {
         sound={sound}
         duration={duration}
         isPlaying={isPlaying}
+        isLoaded={isLoaded}
         playingButton={playingButton}
         handleToggleSidebar={handleToggleSidebar}
       />
