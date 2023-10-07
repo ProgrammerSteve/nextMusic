@@ -48,7 +48,7 @@ export default function Home() {
       onplay: (id) => {
         setIsPlaying(true);
         setSeekId(id);
-        setDuration(newSound.duration());
+
         const updateInterval = setInterval(() => {
           const seekTime = newSound.seek(id);
           setSeconds(Math.floor(seekTime));
@@ -72,6 +72,11 @@ export default function Home() {
       },
       onload: (id) => {
         setIsLoaded(true);
+        let newDuration = newSound.duration(id);
+        setDuration(newDuration);
+        const min = Math.floor(newDuration / 60);
+        const sec = Math.floor(newDuration % 60);
+        setTime({ min, sec });
       },
     });
     setSound(newSound);
@@ -106,7 +111,6 @@ export default function Home() {
   const handleNavigate = async () => {
     sound?.stop();
     sound?.unload();
-    console.log("");
   };
 
   return (
