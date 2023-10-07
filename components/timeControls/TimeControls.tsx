@@ -55,7 +55,7 @@ const TimeControls = ({
       <input
         type="range"
         min="0"
-        max={duration ? duration * 1000 : 0}
+        max={duration ? duration : 0}
         value={seconds}
         className="w-[95%] bg-[#27ae60] cursor-pointer"
         onChange={handleTimeBar}

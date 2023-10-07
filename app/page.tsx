@@ -8,6 +8,7 @@ import { Howl, Howler } from "howler";
 import { songList } from "@/store/music/music.types";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
+import { loadSongById } from "@/store/music/music.action";
 
 export type Time = {
   min: number;
@@ -18,9 +19,9 @@ export default function Home() {
   const dispatch = useAppDispatch();
   const songObj = useAppSelector(selectSongObj);
   // const songUrl = path.join(__dirname, "..", songObj?.songUrl || "");
-  useEffect(() => {
-    console.log("songObj:", songObj);
-  }, []);
+  // useEffect(() => {
+  //   console.log("songObj:", songObj);
+  // }, []);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [seekId, setSeekId] = useState<number>(0);
@@ -37,6 +38,27 @@ export default function Home() {
     min: 0,
     sec: 0,
   });
+
+  const handleFwdBtn = () => {
+    if (sound) {
+      sound.pause();
+    }
+    let songIndex = songList.findIndex((obj) => obj.songID === songObj.songID);
+    let nextSongIndex = (songIndex + 1) % songList.length;
+    let nextSong = songList[nextSongIndex];
+    dispatch(loadSongById(nextSong.songID));
+  };
+
+  const handleBackBtn = () => {
+    if (sound) {
+      sound.pause();
+    }
+    let songIndex = songList.findIndex((obj) => obj.songID === songObj.songID);
+    let nextSongIndex =
+      songIndex == 0 ? songList.length - 1 : (songIndex - 1) % songList.length;
+    let nextSong = songList[nextSongIndex];
+    dispatch(loadSongById(nextSong.songID));
+  };
 
   useEffect(() => {
     const songUrl = songObj?.songUrl || "";
@@ -127,6 +149,8 @@ export default function Home() {
         isLoaded={isLoaded}
         playingButton={playingButton}
         handleToggleSidebar={handleToggleSidebar}
+        handleFwdBtn={handleFwdBtn}
+        handleBackBtn={handleBackBtn}
       />
 
       <div className="flex main-body overflow-clip">

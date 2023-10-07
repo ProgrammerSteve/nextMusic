@@ -12,12 +12,23 @@ interface Props {
   isPlaying: boolean;
   isLoaded: boolean;
   playingButton: () => void;
+  handleFwdBtn: () => void;
+  handleBackBtn: () => void;
 }
 
-const MusicControls = ({ isPlaying, playingButton, isLoaded }: Props) => {
+const MusicControls = ({
+  isPlaying,
+  playingButton,
+  isLoaded,
+  handleFwdBtn,
+  handleBackBtn,
+}: Props) => {
   return (
     <div>
-      <button className="bg-none border-0 items-center justify-center">
+      <button
+        onClick={handleBackBtn}
+        className="bg-none border-0 items-center justify-center"
+      >
         <BiSkipPrevious className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
       </button>
       {!isPlaying ? (
@@ -40,7 +51,10 @@ const MusicControls = ({ isPlaying, playingButton, isLoaded }: Props) => {
           <AiFillPauseCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
         </button>
       )}
-      <button className="bg-none border-0 items-center justify-center">
+      <button
+        onClick={handleFwdBtn}
+        className="bg-none border-0 items-center justify-center"
+      >
         <BiSkipNext className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
       </button>
     </div>

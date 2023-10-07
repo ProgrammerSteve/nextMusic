@@ -19,6 +19,8 @@ interface Props {
   isPlaying: boolean;
   isLoaded: boolean;
   playingButton: () => void;
+  handleFwdBtn: () => void;
+  handleBackBtn: () => void;
 }
 
 const NavBar = ({
@@ -33,6 +35,8 @@ const NavBar = ({
   isLoaded,
   playingButton,
   handleToggleSidebar,
+  handleFwdBtn,
+  handleBackBtn,
 }: Props) => {
   const handleSeek = () => {
     if (!sound) return;
@@ -55,6 +59,8 @@ const NavBar = ({
             isPlaying={isPlaying}
             isLoaded={isLoaded}
             playingButton={playingButton}
+            handleFwdBtn={handleFwdBtn}
+            handleBackBtn={handleBackBtn}
           />
         </div>
 
