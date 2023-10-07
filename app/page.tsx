@@ -157,6 +157,7 @@ export default function Home() {
         <SideBar
           isSidebarShown={isSidebarShown}
           handleToggleSidebar={handleToggleSidebar}
+          sound={sound}
         />
         <SheetMusic />
       </div>

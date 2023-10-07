@@ -2,6 +2,7 @@ import { RootState } from "@/store/store";
 import React from "react";
 
 import { loadSongById } from "@/store/music/music.action";
+import { Howl, Howler } from "howler";
 //loadSongById
 import { SongObject } from "@/store/music/music.types";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
@@ -11,11 +12,15 @@ import { selectSongObjID } from "@/store/music/music.selector";
 interface Props {
   songObj: SongObject;
   closeSideBar: () => void;
+  sound: Howl | null;
 }
-const SongListItem = ({ songObj, closeSideBar }: Props) => {
+const SongListItem = ({ songObj, closeSideBar, sound }: Props) => {
   const selectedSongID = useAppSelector(selectSongObjID);
   const dispatch = useAppDispatch();
   const handleClick = () => {
+    if (sound) {
+      sound.pause();
+    }
     dispatch(loadSongById(songObj.songID));
     closeSideBar();
   };
