@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Fragment } from "react";
+import { SongObject } from "@/store/music/music.types";
 
 import { AiFillHome } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";
@@ -18,13 +19,17 @@ import { bindActionCreators } from "redux";
 import { selectSong } from "@/store/music/music.action";
 import { songList } from "@/store/music/music.types";
 import { loadSongById } from "@/store/music/music.action";
+import { Howl, Howler } from "howler";
 
 interface Props {
   placeholder: string;
   type: "name" | "composer";
+
+  sound: Howl | null;
+  closeSideBar: () => void;
 }
 
-const SearchInput = ({ placeholder, type }: Props) => {
+const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
   const dispatch = useDispatch();
 
   // {
@@ -37,6 +42,7 @@ const SearchInput = ({ placeholder, type }: Props) => {
   // },
 
   const [query, setQuery] = useState("");
+
   const filteredPieces =
     query === ""
       ? songList
@@ -64,24 +70,34 @@ const SearchInput = ({ placeholder, type }: Props) => {
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="items-center w-full mt-1 rounded absolute z-[99]">
-              {filteredPieces.map((piece) => (
-                <Combobox.Option
-                  key={piece.name}
-                  value={piece}
-                  onClick={() => dispatch(loadSongById(piece.songID))}
-                  className={({ active }) =>
-                    ` relative search__option ${
-                      active
-                        ? "text-white bg-blue-700 cursor-pointer"
-                        : "text-gray-900 bg-white cursor-pointer"
-                    }`
+              {filteredPieces.map((piece) => {
+                const handleClick = () => {
+                  if (sound) {
+                    sound.pause();
                   }
-                >
-                  {type === "name"
-                    ? `${piece.name} - ${piece.composer}`
-                    : `${piece.composer} - ${piece.name}`}
-                </Combobox.Option>
-              ))}
+                  dispatch(loadSongById(piece.songID));
+                  closeSideBar();
+                };
+
+                return (
+                  <Combobox.Option
+                    key={piece.name}
+                    value={piece}
+                    onClick={handleClick}
+                    className={({ active }) =>
+                      ` relative search__option ${
+                        active
+                          ? "text-white bg-blue-700 cursor-pointer"
+                          : "text-gray-900 bg-white cursor-pointer"
+                      }`
+                    }
+                  >
+                    {type === "name"
+                      ? `${piece.name} - ${piece.composer}`
+                      : `${piece.composer} - ${piece.name}`}
+                  </Combobox.Option>
+                );
+              })}
             </Combobox.Options>
           </Transition>
         </div>

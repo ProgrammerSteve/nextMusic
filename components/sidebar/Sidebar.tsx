@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import SearchInput from "@/components/searchInput/SearchInput";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
+import { Howl, Howler } from "howler";
 import { songList } from "@/store/music/music.types";
 import { AiFillHome } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";
@@ -15,10 +16,11 @@ import { RxLetterCaseCapitalize } from "react-icons/rx";
 interface Props {
   isSidebarShown: boolean;
   handleToggleSidebar: () => void;
+  sound: Howl | null;
 }
 
 import SongListItem from "@/components/songListItem/SongListItem";
-const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
+const Sidebar = ({ isSidebarShown, handleToggleSidebar, sound }: Props) => {
   const closeSideBar = () => {
     setTimeout(() => {
       isSidebarShown && handleToggleSidebar();
@@ -28,11 +30,22 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
     <>
       <div className="sidebar h-screen md:h-full bg-gray-800 text-white hidden md:flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0  z-50">
         <div className="flex flex-col gap-4">
-          <SearchInput placeholder={"Enter song title"} type={"name"} />
-          <SearchInput placeholder={"Enter song author"} type={"composer"} />
+          <SearchInput
+            placeholder={"Enter song title"}
+            type={"name"}
+            closeSideBar={closeSideBar}
+            sound={sound}
+          />
+          <SearchInput
+            placeholder={"Enter song author"}
+            type={"composer"}
+            closeSideBar={closeSideBar}
+            sound={sound}
+          />
         </div>
         {songList.map((songObj) => (
           <SongListItem
+            sound={sound}
             songObj={songObj}
             key={songObj.songID}
             closeSideBar={closeSideBar}
@@ -44,15 +57,23 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar }: Props) => {
         <>
           <div className="sidebar h-screen md:h-full bg-gray-800 text-white flex md:hidden flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0 z-50">
             <div className="flex flex-col gap-4">
-              <SearchInput placeholder={"Enter song title"} type={"name"} />
+              <SearchInput
+                placeholder={"Enter song title"}
+                type={"name"}
+                closeSideBar={closeSideBar}
+                sound={sound}
+              />
               <SearchInput
                 placeholder={"Enter song author"}
                 type={"composer"}
+                closeSideBar={closeSideBar}
+                sound={sound}
               />
             </div>
 
             {songList.map((songObj) => (
               <SongListItem
+                sound={sound}
                 songObj={songObj}
                 key={songObj.songID}
                 closeSideBar={closeSideBar}

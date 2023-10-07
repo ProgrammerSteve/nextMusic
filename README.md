@@ -29,4 +29,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ~~Handle left and right button for music controls~~
 - handle onLoad Error
 - handle onPlay Error
-- look for any memory leaks with the load and unloading of songs
+- ~~look for any memory leaks with the load and unloading of songs~~
