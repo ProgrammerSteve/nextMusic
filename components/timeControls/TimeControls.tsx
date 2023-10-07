@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import type { Time } from "@/app/page";
 import { Howl } from "howler";
 
@@ -21,6 +21,10 @@ const TimeControls = ({
   handleTimeBar,
   sound,
 }: Props) => {
+  useEffect(() => {
+    console.log("duration:", duration);
+  }, [duration]);
+
   return (
     <div className="w-[90%] md:w-auto grow-0 md:grow">
       <div className="my-0 mx-auto w-[95%] flex justify-between text-[#828282] text-sm">
@@ -51,7 +55,7 @@ const TimeControls = ({
       <input
         type="range"
         min="0"
-        max={duration ? duration : 0 / 1000}
+        max={duration ? duration * 1000 : 0}
         value={seconds}
         className="w-[95%] bg-[#27ae60] cursor-pointer"
         onChange={handleTimeBar}

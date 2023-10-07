@@ -4,7 +4,7 @@ import React from "react";
 
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"; // icons for play and pause
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi"; // icons for next and previous track
-import { IconContext } from "react-icons"; // for customazing the icons
+import { BsArrowClockwise } from "react-icons/bs";
 
 const color = "#50505d";
 
@@ -22,11 +22,15 @@ const MusicControls = ({ isPlaying, playingButton, isLoaded }: Props) => {
       </button>
       {!isPlaying ? (
         <button
-          className="bg-none border-0 items-center justify-center disabled:bg-red-500"
+          className="bg-none border-0 items-center justify-center "
           onClick={playingButton}
           disabled={!isLoaded}
         >
-          <AiFillPlayCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
+          {!isLoaded ? (
+            <BsArrowClockwise className="animate-spin text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
+          ) : (
+            <AiFillPlayCircle className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]" />
+          )}
         </button>
       ) : (
         <button

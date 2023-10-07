@@ -24,9 +24,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ~~ make Sidebar hidden in mobile and have it get toggled ~~
 - ~~Make Sidebar searchable~~
 - ~~Make pdf document from react-pdf look better~~
-- Add loading icon for music controls with animation
-- fix time control input element to be in sync with 
-- Handle what happens after the song finishes
+- ~~Add loading icon for music controls with animation~~
+- ~~fix time control input element to be in sync with~~
+- Handle left and right button for music controls
 - handle onLoad Error
 - handle onPlay Error
 - look for any memory leaks with the load and unloading of songs
