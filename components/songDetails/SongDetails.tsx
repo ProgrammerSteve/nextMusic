@@ -1,7 +1,6 @@
-import { RootState } from "@/store/store";
 import React from "react";
 
-import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
+import { useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
 
 const SongDetails = () => {

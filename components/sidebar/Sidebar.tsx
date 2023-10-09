@@ -1,17 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import SearchInput from "@/components/searchInput/SearchInput";
-import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import { songList } from "@/store/music/music.types";
-import { AiFillHome } from "react-icons/ai";
-import { BiCog } from "react-icons/bi";
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { BsFillPersonFill, BsArrowUp, BsMusicNoteBeamed } from "react-icons/bs";
-import { AiOutlineCalendar, AiOutlineClose } from "react-icons/ai";
-import { MdDriveFolderUpload } from "react-icons/md";
-import { RxLetterCaseCapitalize } from "react-icons/rx";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface Props {
   isSidebarShown: boolean;
@@ -29,7 +22,7 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar, sound }: Props) => {
   return (
     <>
       <div className="sidebar h-screen md:h-full bg-gray-800 text-white hidden md:flex flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0  z-50">
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pb-4">
           <SearchInput
             placeholder={"Enter song title"}
             type={"name"}
@@ -56,7 +49,7 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar, sound }: Props) => {
       {isSidebarShown && (
         <>
           <div className="sidebar h-screen md:h-full bg-gray-800 text-white flex md:hidden flex-col justify-start items-center p-4 overflow-y-scroll scrollbar-hide absolute md:relative top-0 z-50">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4  pb-4">
               <SearchInput
                 placeholder={"Enter song title"}
                 type={"name"}

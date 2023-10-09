@@ -1,46 +1,22 @@
 "use client";
 
 import React, { Fragment } from "react";
-import { SongObject } from "@/store/music/music.types";
-
-import { AiFillHome } from "react-icons/ai";
-import { BiCog } from "react-icons/bi";
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { BsFillPersonFill, BsArrowUp, BsMusicNoteBeamed } from "react-icons/bs";
-import { AiOutlineCalendar } from "react-icons/ai";
-import { MdDriveFolderUpload } from "react-icons/md";
-import { RxLetterCaseCapitalize } from "react-icons/rx";
-import { classical_music_pieces } from "@/constants";
 import { useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { bindActionCreators } from "redux";
-import { selectSong } from "@/store/music/music.action";
+import { useDispatch } from "react-redux";
 import { songList } from "@/store/music/music.types";
 import { loadSongById } from "@/store/music/music.action";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 
 interface Props {
   placeholder: string;
   type: "name" | "composer";
-
   sound: Howl | null;
   closeSideBar: () => void;
 }
 
 const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
   const dispatch = useDispatch();
-
-  // {
-  //   name: "Scherzo",
-  //   composer: "Frédéric Chopin",
-  //   imageUrl: "https://images.unsplash.com/photo-1468164016595-6108e4c60c8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
-  //   songUrl: pathToScherzoMp3,
-  //   pdfUrl: pathToScherzoPdf,
-  //   songID: '00004'
-  // },
-
   const [query, setQuery] = useState("");
 
   const filteredPieces =
@@ -52,10 +28,7 @@ const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
 
   return (
     <div className="flex flex-col">
-      <Combobox
-        value={{ name: "", composer: "" }}
-        onChange={(e) => dispatch(selectSong(e))}
-      >
+      <Combobox value={{ name: "", composer: "" }}>
         <div className="relative">
           <Combobox.Input
             placeholder={placeholder}
@@ -107,14 +80,3 @@ const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
 };
 
 export default SearchInput;
-
-{
-  /* <input
-  className="rounded-2xl pl-8 placeholder-black block h-[45px] leading-[45px]"
-  type={"text"}
-  placeholder={placeholder}
-></input> */
-}
-{
-  /* <HiMagnifyingGlass className="block absolute h-[45px] top-0 translate-x-2" /> */
-}

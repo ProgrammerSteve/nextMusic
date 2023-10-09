@@ -1,7 +1,6 @@
-import { Piece } from "@/constants";
 import { MUSIC_CASES } from "./music.types";
 import { createAction } from "@/utils/reducer.utils";
-import { AnyAction, Dispatch } from "redux";
+import { AnyAction } from "redux";
 import { songList } from "./music.types";
 
 /**
@@ -12,16 +11,6 @@ import { songList } from "./music.types";
 export const loadSong = (songName: string): AnyAction => {
   return createAction(MUSIC_CASES.LOAD_SONG, songName)
 }
-
-/**
- * 
- * @param piece 
- * @returns {AnyAction}
- */
-export const selectSong = (piece: Piece): AnyAction => {
-  return createAction(MUSIC_CASES.SELECT_SONG, piece)
-}
-
 
 /**
  * 

@@ -1,12 +1,9 @@
 "use client";
 
 import React from "react";
-
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"; // icons for play and pause
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi"; // icons for next and previous track
 import { BsArrowClockwise } from "react-icons/bs";
-
-const color = "#50505d";
 
 interface Props {
   isPlaying: boolean;

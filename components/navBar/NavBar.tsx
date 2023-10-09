@@ -1,4 +1,3 @@
-import NavLinks from "../navLinks/NavLinks";
 import SongDetails from "../songDetails/SongDetails";
 import TimeControls from "../timeControls/TimeControls";
 import MusicControls from "../musicControls/MusicControls";
@@ -24,7 +23,6 @@ interface Props {
 }
 
 const NavBar = ({
-  handleNavigate,
   currTime,
   time,
   seconds,
@@ -38,11 +36,6 @@ const NavBar = ({
   handleFwdBtn,
   handleBackBtn,
 }: Props) => {
-  const handleSeek = () => {
-    if (!sound) return;
-    sound.seek(4000, 1);
-  };
-
   return (
     <div className="navbar bg-gray-200 flex items-center justify-start px-4">
       <div className="flex flex-col md:flex-row items-center justify-start gap-2 font-sans text-center w-[100%]">
@@ -73,7 +66,6 @@ const NavBar = ({
           duration={duration}
         />
       </div>
-      {/* <NavLinks handleNavigate={handleNavigate} /> */}
     </div>
   );
 };

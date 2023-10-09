@@ -1,13 +1,9 @@
 "use client";
-// #view=fitH  is for fit Horizaontal
+
 import React, { useEffect, useState } from "react";
-import { Document, Page, pdfjs, DocumentProps } from "react-pdf";
-// import "react-pdf/dist/esm/Page/TextLayer.css";
-// import clairDeLune from "../../public/pdfs/debussyclairdelune.pdf";
+import { Document, Page, pdfjs } from "react-pdf";
 import { useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
-
-type OnDocumentLoadSuccess = DocumentProps["onLoadSuccess"];
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -65,18 +61,7 @@ const SheetMusic = () => {
 
   return (
     <div className="h-[100%] w-full md:w-auto flex-grow-[0] md:flex-grow-[1] bg-gray-900 flex flex-col overflow-clip">
-      {/* <object
-        className="w-[100%] h-[100%]"
-        type="application/pdf"
-        data={"/pdfs/debussyclairdelune.pdf"}
-      ></object> */}
-      {/* <iframe
-        loading="lazy"
-        className="w-[100%] h-[100%] bg-gray-900"
-        src={`${songObj.pdfUrl}`}
-        title="Sheet Music"
-      ></iframe> */}
-      <nav className="bg-gray-950 text-white flex gap-5">
+      <nav className="bg-gray-950 text-white py-2 sm:py-0 flex gap-3 sm:gap-5 text-xs sm:text-base">
         <p className="select-none">
           Page {pageNumber || 1} of {numPages || 1}
         </p>

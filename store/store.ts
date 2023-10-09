@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { rootReducer } from './root-reducer';
 import { batchDispatchMiddleware } from 'redux-batched-actions';
 
-import { createWrapper, HYDRATE, Context } from 'next-redux-wrapper';
+import { createWrapper, Context } from 'next-redux-wrapper';
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch;
@@ -26,11 +26,14 @@ let reduxLoggerOptions: ReduxLoggerOptions = {
 };
 const loggerMiddleware = createLogger(reduxLoggerOptions);
 
+
+
 const middleWares = [
   thunk,
   batchDispatchMiddleware,
-  loggerMiddleware
 ].filter(Boolean);
+
+if (process.env.NODE_ENV !== 'production') middleWares.push(loggerMiddleware)
 
 export const store = createStore(rootReducer, bindMiddleware(middleWares));
 
