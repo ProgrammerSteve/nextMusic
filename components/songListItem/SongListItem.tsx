@@ -1,13 +1,9 @@
-import { RootState } from "@/store/store";
 import React from "react";
-
 import { loadSongById } from "@/store/music/music.action";
-import { Howl, Howler } from "howler";
-//loadSongById
+import { Howl } from "howler";
 import { SongObject } from "@/store/music/music.types";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObjID } from "@/store/music/music.selector";
-//selectSongObj
 
 interface Props {
   songObj: SongObject;

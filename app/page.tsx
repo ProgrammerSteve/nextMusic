@@ -4,7 +4,7 @@ import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import NavBar from "../components/navBar/NavBar";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import { songList } from "@/store/music/music.types";
 import { useAppDispatch, useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
@@ -18,10 +18,6 @@ export type Time = {
 export default function Home() {
   const dispatch = useAppDispatch();
   const songObj = useAppSelector(selectSongObj);
-  // const songUrl = path.join(__dirname, "..", songObj?.songUrl || "");
-  // useEffect(() => {
-  //   console.log("songObj:", songObj);
-  // }, []);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [seekId, setSeekId] = useState<number>(0);
