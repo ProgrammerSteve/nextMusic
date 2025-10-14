@@ -30,36 +30,9 @@
   height: calc(100vh - var(--navheight));
 }
 .sidebar{
-  width: 300px;
-  min-width: 300px;
+  width: 280px;
+  min-width: 280px;
 }
-
-.search__option {
-  @apply cursor-default select-none py-2 pl-10 pr-4;
-}
-
-
-/* :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
 
 
 .page {
@@ -70,4 +43,3 @@ body {
   margin: 0 auto;
   overflow: scroll;
 }
-

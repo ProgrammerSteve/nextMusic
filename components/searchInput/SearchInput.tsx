@@ -32,9 +32,9 @@ const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
         <div className="relative">
           <Combobox.Input
             placeholder={placeholder}
-            className="rounded-2xl pl-8 placeholder-black block h-[45px] leading-[45px] text-black"
+            className="w-full rounded-xl bg-white/5 border border-white/10 px-4 h-[40px] text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-transparent transition-all"
             onChange={(event) => setQuery(event.target.value)}
-          ></Combobox.Input>
+          />
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -42,7 +42,7 @@ const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="items-center w-full mt-1 rounded absolute z-[99]">
+            <Combobox.Options className="w-full mt-1.5 rounded-xl absolute z-[99] overflow-hidden bg-gray-800 border border-white/10 shadow-xl shadow-black/40">
               {filteredPieces.map((piece) => {
                 const handleClick = () => {
                   if (sound) {
@@ -58,16 +58,16 @@ const SearchInput = ({ placeholder, type, sound, closeSideBar }: Props) => {
                     value={piece}
                     onClick={handleClick}
                     className={({ active }) =>
-                      ` relative search__option ${
+                      `cursor-pointer select-none py-2.5 px-4 text-sm transition-colors ${
                         active
-                          ? "text-white bg-blue-700 cursor-pointer"
-                          : "text-gray-900 bg-white cursor-pointer"
+                          ? "text-white bg-indigo-600"
+                          : "text-gray-300"
                       }`
                     }
                   >
                     {type === "name"
-                      ? `${piece.name} - ${piece.composer}`
-                      : `${piece.composer} - ${piece.name}`}
+                      ? `${piece.name} — ${piece.composer}`
+                      : `${piece.composer} — ${piece.name}`}
                   </Combobox.Option>
                 );
               })}
