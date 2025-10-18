@@ -37,13 +37,17 @@ const NavBar = ({
   handleBackBtn,
 }: Props) => {
   return (
-    <div className="navbar bg-gray-200 flex items-center justify-start px-4">
-      <div className="flex flex-col md:flex-row items-center justify-start gap-2 font-sans text-center w-[100%]">
-        <div className="h-[20px] w-full flex md:hidden justify-end items-center ">
-          <AiOutlineMenu
+    <div className="navbar bg-gray-950 border-b border-white/5 flex items-center px-4 md:px-6">
+      <div className="flex flex-col md:flex-row items-center justify-start gap-2 w-full">
+        {/* Mobile menu button */}
+        <div className="h-[20px] w-full flex md:hidden justify-end items-center">
+          <button
             onClick={handleToggleSidebar}
-            className="text-[2em] sm:text-[3em] md:text-[3em] text-[#50505d]"
-          />
+            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Toggle sidebar"
+          >
+            <AiOutlineMenu className="text-xl text-gray-400" />
+          </button>
         </div>
 
         <div className="flex items-center justify-between w-[90%] md:w-auto">

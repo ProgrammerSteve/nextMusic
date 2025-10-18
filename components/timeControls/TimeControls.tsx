@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent } from "react";
 import type { Time } from "@/app/page";
 import { Howl } from "howler";
 
@@ -13,49 +13,34 @@ interface Props {
   duration: number | null;
 }
 
+const formatTime = (t: Time) =>
+  `${t.min.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false })}:${t.sec.toLocaleString("en-US", { minimumIntegerDigits: 2, useGrouping: false })}`;
+
 const TimeControls = ({
   currTime,
   time,
   duration,
   seconds,
   handleTimeBar,
-  sound,
 }: Props) => {
   return (
-    <div className="w-[90%] md:w-auto grow-0 md:grow">
-      <div className="my-0 mx-auto w-[95%] flex justify-between text-[#828282] text-sm">
-        <p>
-          {currTime.min.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-          :
-          {currTime.sec.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-        </p>
-        <p>
-          {time.min.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-          :
-          {time.sec.toLocaleString("en-US", {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
-        </p>
+    <div className="w-[90%] md:w-auto grow-0 md:grow flex items-center gap-3">
+      <span className="text-xs text-gray-500 tabular-nums min-w-[36px] text-right">
+        {formatTime(currTime)}
+      </span>
+      <div className="relative flex-1 group">
+        <input
+          type="range"
+          min="0"
+          max={duration ? duration : 0}
+          value={seconds}
+          className="time-slider w-full cursor-pointer"
+          onChange={handleTimeBar}
+        />
       </div>
-
-      <input
-        type="range"
-        min="0"
-        max={duration ? duration : 0}
-        value={seconds}
-        className="w-[95%] bg-[#27ae60] cursor-pointer"
-        onChange={handleTimeBar}
-      />
+      <span className="text-xs text-gray-500 tabular-nums min-w-[36px]">
+        {formatTime(time)}
+      </span>
     </div>
   );
 };
