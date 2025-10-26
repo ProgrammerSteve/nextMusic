@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
@@ -22,11 +22,16 @@ const SheetMusic = () => {
   const [pageScale, setPageScale] = useState(1);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setPageNumber(1);
     setPageScale(1);
   }, [songObj]);
+
+  const scrollToTop = () => {
+    scrollRef.current?.scrollTo({ top: 0, left: 0 });
+  };
 
   const onDocumentLoadSuccess = (document: any) => {
     if (!document) return;
@@ -34,20 +39,28 @@ const SheetMusic = () => {
   };
 
   function handleZoomIn() {
-    if (pageScale < 3) setPageScale(pageScale + 0.2);
+    if (pageScale < 3) {
+      setPageScale(pageScale + 0.2);
+      scrollToTop();
+    }
   }
 
   function handleZoomOut() {
-    if (pageScale > 0.3) setPageScale(pageScale - 0.2);
+    if (pageScale > 0.3) {
+      setPageScale(pageScale - 0.2);
+      scrollToTop();
+    }
   }
 
   const goToPrevPage = () => {
     setPageNumber((prev) => (prev - 1 <= 1 ? 1 : prev - 1));
+    scrollToTop();
   };
 
   const goToNextPage = () => {
     if (!numPages) return;
     setPageNumber((prev) => (prev + 1 >= numPages ? numPages : prev + 1));
+    scrollToTop();
   };
 
   useEffect(() => {
@@ -57,9 +70,9 @@ const SheetMusic = () => {
   const zoomPercent = Math.round(pageScale * 100);
 
   return (
-    <div className="h-full w-full md:w-auto flex-grow-0 md:flex-grow bg-gray-900 flex flex-col overflow-clip">
+    <div className="h-full w-full md:w-auto flex-grow-0 md:flex-grow bg-gray-900 flex flex-col overflow-hidden">
       {/* Toolbar */}
-      <nav className="bg-gray-950/80 backdrop-blur-sm border-b border-white/5 px-3 sm:px-4 py-2 flex items-center justify-between gap-2">
+      <nav className="bg-gray-950/80 backdrop-blur-sm border-b border-white/5 px-3 sm:px-4 py-2 flex items-center justify-between gap-2 flex-shrink-0">
         {/* Pagination */}
         <div className="flex items-center gap-1">
           <button
@@ -109,21 +122,22 @@ const SheetMusic = () => {
         </div>
       </nav>
 
-      {/* PDF Content */}
-      <Document
-        className="h-auto page scrollbar-hide"
-        file={`${songObj.pdfUrl}`}
-        onLoadSuccess={onDocumentLoadSuccess}
-        loading={<LoadingComponent />}
-      >
-        <Page
-          className="overflow-scroll scrollbar-hide"
-          scale={pageScale}
-          pageNumber={pageNumber}
-          renderTextLayer={false}
-          renderAnnotationLayer={false}
-        />
-      </Document>
+      {/* Scrollable PDF Content */}
+      <div ref={scrollRef} className="flex-1 overflow-auto scrollbar-hide">
+        <Document
+          className="h-auto page"
+          file={`${songObj.pdfUrl}`}
+          onLoadSuccess={onDocumentLoadSuccess}
+          loading={<LoadingComponent />}
+        >
+          <Page
+            scale={pageScale}
+            pageNumber={pageNumber}
+            renderTextLayer={false}
+            renderAnnotationLayer={false}
+          />
+        </Document>
+      </div>
     </div>
   );
 };
