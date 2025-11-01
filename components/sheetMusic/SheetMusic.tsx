@@ -122,21 +122,37 @@ const SheetMusic = () => {
         </div>
       </nav>
 
-      {/* Scrollable PDF Content */}
-      <div ref={scrollRef} className="flex-1 overflow-auto scrollbar-hide">
-        <Document
-          className="h-auto page"
-          file={`${songObj.pdfUrl}`}
-          onLoadSuccess={onDocumentLoadSuccess}
-          loading={<LoadingComponent />}
-        >
-          <Page
-            scale={pageScale}
-            pageNumber={pageNumber}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-          />
-        </Document>
+      {/* Scrollable PDF Content — inline style to guarantee no scrollbar */}
+      <style jsx>{`
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+      <div
+        ref={scrollRef}
+        className="no-scrollbar flex-1"
+        style={{ overflow: "auto", msOverflowStyle: "none", scrollbarWidth: "none" }}
+      >
+        <div className="flex justify-center min-h-full">
+          <Document
+            className="pdf-document"
+            file={`${songObj.pdfUrl}`}
+            onLoadSuccess={onDocumentLoadSuccess}
+            loading={<LoadingComponent />}
+          >
+            <Page
+              className="pdf-page"
+              scale={pageScale}
+              pageNumber={pageNumber}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+          </Document>
+        </div>
       </div>
     </div>
   );
