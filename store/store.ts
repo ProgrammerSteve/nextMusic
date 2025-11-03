@@ -33,7 +33,7 @@ const middleWares = [
   batchDispatchMiddleware,
 ].filter(Boolean);
 
-if (process.env.NODE_ENV !== 'production') middleWares.push(loggerMiddleware)
+if (process.env.NODE_ENV !== 'production') middleWares.push(loggerMiddleware as Middleware)
 
 export const store = createStore(rootReducer, bindMiddleware(middleWares));
 
