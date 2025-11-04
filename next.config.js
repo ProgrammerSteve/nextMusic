@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config, options) {
+    // Ignore 'canvas' module required by pdfjs-dist for server-side rendering
+    config.resolve.alias.canvas = false;
+
     config.module.rules.push(
       {
         test: /\.(mp3)$/,
