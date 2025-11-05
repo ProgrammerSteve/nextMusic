@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { useAppSelector } from "@/utils/redux.hooks";
 import { selectSongObj } from "@/store/music/music.selector";
@@ -9,12 +9,15 @@ import {
   BiChevronRight,
   BiZoomIn,
   BiZoomOut,
+  BiExpand,
 } from "react-icons/bi";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
 ).toString();
+
+const PDF_BASE_WIDTH = 612;
 
 const SheetMusic = () => {
   const songObj = useAppSelector(selectSongObj);
@@ -23,15 +26,26 @@ const SheetMusic = () => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const getFitScale = useCallback(() => {
+    const width = containerRef.current?.clientWidth;
+    if (!width) return 1;
+    const fitScale = (width - 32) / PDF_BASE_WIDTH;
+    return Math.round(Math.min(2, Math.max(0.3, fitScale)) * 10) / 10;
+  }, []);
+
+  // Measure container and set scale before browser paints
+  useLayoutEffect(() => {
     setPageNumber(1);
-    setPageScale(1);
-  }, [songObj]);
+    const fit = getFitScale();
+    setPageScale(fit);
+  }, [songObj, getFitScale]);
 
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({ top: 0, left: 0 });
   };
+
 
   const onDocumentLoadSuccess = (document: any) => {
     if (!document) return;
@@ -40,17 +54,23 @@ const SheetMusic = () => {
 
   function handleZoomIn() {
     if (pageScale < 3) {
-      setPageScale(pageScale + 0.2);
+      setPageScale((s) => Math.round((s + 0.1) * 10) / 10);
       scrollToTop();
     }
   }
 
   function handleZoomOut() {
     if (pageScale > 0.3) {
-      setPageScale(pageScale - 0.2);
+      setPageScale((s) => Math.round((s - 0.1) * 10) / 10);
       scrollToTop();
     }
   }
+
+  const handleFitToWidth = () => {
+    const fit = getFitScale();
+    setPageScale(fit);
+    scrollToTop();
+  };
 
   const goToPrevPage = () => {
     setPageNumber((prev) => (prev - 1 <= 1 ? 1 : prev - 1));
@@ -65,12 +85,16 @@ const SheetMusic = () => {
 
   useEffect(() => {
     setPdfUrl(`${songObj.pdfUrl}`);
-  }, []);
+  }, [songObj.pdfUrl]);
 
   const zoomPercent = Math.round(pageScale * 100);
 
   return (
-    <div className="h-full w-full md:w-auto flex-grow-0 md:flex-grow bg-gray-900 flex flex-col overflow-hidden">
+    <div
+      ref={containerRef}
+      className="h-full w-full md:w-auto flex-grow-0 md:flex-grow bg-gray-900 flex flex-col overflow-hidden"
+    >
+
       {/* Toolbar */}
       <nav className="bg-gray-950/80 backdrop-blur-sm border-b border-white/5 px-3 sm:px-4 py-2 flex items-center justify-between gap-2 flex-shrink-0">
         {/* Pagination */}
@@ -119,10 +143,19 @@ const SheetMusic = () => {
           >
             <BiZoomIn className="text-lg text-gray-300" />
           </button>
+          <button
+            onClick={handleFitToWidth}
+            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors ml-1"
+            aria-label="Fit to width"
+            title="Fit to width"
+          >
+            <BiExpand className="text-lg text-gray-300" />
+          </button>
         </div>
       </nav>
 
-      {/* Scrollable PDF Content — inline style to guarantee no scrollbar */}
+
+      {/* Scrollable PDF Content */}
       <style jsx>{`
         .no-scrollbar {
           -ms-overflow-style: none;
