@@ -1,13 +1,10 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 :root{
   --navheight: 130px;
 }
-
-
 
 @media screen and (max-width: 768px)  {
   :root{
@@ -20,9 +17,6 @@
   }
 }
 
-
-
-
 .navbar{
   height: var(--navheight);
 }
@@ -34,7 +28,6 @@
   min-width: 280px;
 }
 
-
 .page {
   display: flex;
   flex-direction: column;
@@ -42,4 +35,19 @@
   align-items: center;
   margin: 0 auto;
   overflow: scroll;
+}
+
+/* Hide scrollbars for PDF containers */
+.pdf-document,
+.pdf-page,
+.react-pdf__Document,
+.react-pdf__Page {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pdf-document::-webkit-scrollbar,
+.pdf-page::-webkit-scrollbar,
+.react-pdf__Document::-webkit-scrollbar,
+.react-pdf__Page::-webkit-scrollbar {
+  display: none;
 }
