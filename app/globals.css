@@ -51,3 +51,119 @@
 .react-pdf__Page::-webkit-scrollbar {
   display: none;
 }
+
+/* ── Time / progress range slider ── */
+.time-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  transition: height 0.15s ease;
+}
+.time-slider:hover {
+  height: 6px;
+}
+
+/* Track – WebKit */
+.time-slider::-webkit-slider-runnable-track {
+  height: inherit;
+  border-radius: 9999px;
+  background: transparent;
+}
+
+/* Thumb – WebKit */
+.time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #818cf8;
+  border: none;
+  margin-top: -4px;
+  box-shadow: 0 0 6px rgba(129, 140, 248, 0.5);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+.time-slider:hover::-webkit-slider-thumb {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Track – Firefox */
+.time-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.time-slider:hover::-moz-range-track {
+  height: 6px;
+}
+
+/* Progress fill – Firefox */
+.time-slider::-moz-range-progress {
+  height: inherit;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #6366f1, #818cf8);
+}
+
+/* Thumb – Firefox */
+.time-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #818cf8;
+  border: none;
+  box-shadow: 0 0 6px rgba(129, 140, 248, 0.5);
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+.time-slider:hover::-moz-range-thumb {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Time slider styling */
+.time-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+.time-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #818cf8;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.time-slider::-webkit-slider-thumb:hover {
+  background: #a5b4fc;
+  transform: scale(1.2);
+}
+.time-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #818cf8;
+  cursor: pointer;
+  border: none;
+}
+.time-slider::-moz-range-thumb:hover {
+  background: #a5b4fc;
+}
+.time-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
