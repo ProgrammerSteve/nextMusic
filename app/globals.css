@@ -137,15 +137,21 @@
   outline: none;
 }
 .time-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: #818cf8;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background: #818cf8 !important;
   cursor: pointer;
-  border: none;
+  border: none !important;
+  margin-top: -4px;
   transition: transform 0.15s ease, background 0.15s ease;
+}
+.time-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
 }
 .time-slider::-webkit-slider-thumb:hover {
   background: #a5b4fc;
@@ -167,3 +173,5 @@
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.1);
 }
+
+
