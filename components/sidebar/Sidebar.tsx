@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React from "react";
 import SearchInput from "@/components/searchInput/SearchInput";
@@ -68,56 +68,60 @@ const Sidebar = ({ isSidebarShown, handleToggleSidebar, sound }: Props) => {
         <SidebarContent sound={sound} closeSideBar={closeSideBar} />
       </div>
 
-      {/* Mobile sidebar */}
-      {isSidebarShown && (
-        <>
-          <div className="sidebar h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white flex md:hidden flex-col overflow-y-auto scrollbar-hide absolute top-0 z-50 shadow-2xl shadow-black/50">
-            <div className="flex items-center justify-between px-4 pt-4">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
-                Library
-              </h2>
-              <button
-                onClick={handleToggleSidebar}
-                className="p-2 rounded-full hover:bg-gray-800 transition-colors"
-                aria-label="Close sidebar"
-              >
-                <AiOutlineClose className="text-xl text-gray-400" />
-              </button>
-            </div>
-            <div className="px-4 pt-3 pb-2">
-              <div className="flex flex-col gap-3">
-                <SearchInput
-                  placeholder="Search by title..."
-                  type="name"
-                  closeSideBar={closeSideBar}
-                  sound={sound}
-                />
-                <SearchInput
-                  placeholder="Search by composer..."
-                  type="composer"
-                  closeSideBar={closeSideBar}
-                  sound={sound}
-                />
-              </div>
-            </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-4 my-3" />
-            <div className="px-3 pb-4 flex flex-col gap-1">
-              {songList.map((songObj) => (
-                <SongListItem
-                  sound={sound}
-                  songObj={songObj}
-                  key={songObj.songID}
-                  closeSideBar={closeSideBar}
-                />
-              ))}
-            </div>
-          </div>
-          <div
+      {/* Mobile overlay backdrop */}
+      <div
+        onClick={handleToggleSidebar}
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[49] md:hidden transition-opacity duration-300 ${
+          isSidebarShown ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Mobile sidebar - always in DOM, slides in/out */}
+      <div
+        className={`sidebar h-screen bg-gradient-to-b from-gray-900 via-gray-900 to-gray-950 text-white flex md:hidden flex-col overflow-y-auto scrollbar-hide fixed top-0 left-0 z-50 shadow-2xl shadow-black/50 transition-transform duration-300 ease-in-out ${
+          isSidebarShown ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between px-4 pt-4">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+            Library
+          </h2>
+          <button
             onClick={handleToggleSidebar}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[49] md:hidden"
-          />
-        </>
-      )}
+            className="p-2 rounded-full hover:bg-gray-800 transition-colors"
+            aria-label="Close sidebar"
+          >
+            <AiOutlineClose className="text-xl text-gray-400" />
+          </button>
+        </div>
+        <div className="px-4 pt-3 pb-2">
+          <div className="flex flex-col gap-3">
+            <SearchInput
+              placeholder="Search by title..."
+              type="name"
+              closeSideBar={closeSideBar}
+              sound={sound}
+            />
+            <SearchInput
+              placeholder="Search by composer..."
+              type="composer"
+              closeSideBar={closeSideBar}
+              sound={sound}
+            />
+          </div>
+        </div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-4 my-3" />
+        <div className="px-3 pb-4 flex flex-col gap-1">
+          {songList.map((songObj) => (
+            <SongListItem
+              sound={sound}
+              songObj={songObj}
+              key={songObj.songID}
+              closeSideBar={closeSideBar}
+            />
+          ))}
+        </div>
+      </div>
     </>
   );
 };
