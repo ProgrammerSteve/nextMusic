@@ -19,9 +19,11 @@
 
 .navbar{
   height: var(--navheight);
+  transition: height 0.3s ease;
 }
 .main-body{
   height: calc(100vh - var(--navheight));
+  transition: height 0.3s ease;
 }
 .sidebar{
   width: 280px;
@@ -173,5 +175,17 @@
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.1);
 }
+
+
+
+
+/* Collapsed navbar overrides (mobile only) */
+@media screen and (max-width: 767px) {
+  .nav-collapsed .main-body {
+    height: calc(100vh - 68px);
+  }
+}
+
+
 
 

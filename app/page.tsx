@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import SideBar from "../components/sidebar/Sidebar";
 import SheetMusic from "../components/sheetMusic/SheetMusic";
@@ -25,48 +25,34 @@ export default function Home() {
   const [duration, setDuration] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isSidebarShown, setIsSidebarShown] = useState(false);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const handleToggleSidebar = () => setIsSidebarShown(!isSidebarShown);
-  const [currTime, setCurrTime] = useState({
-    min: 0,
-    sec: 0,
-  });
-  const [time, setTime] = useState({
-    min: 0,
-    sec: 0,
-  });
+  const toggleNavCollapsed = () => setIsNavCollapsed(!isNavCollapsed);
+  const [currTime, setCurrTime] = useState({ min: 0, sec: 0 });
+  const [time, setTime] = useState({ min: 0, sec: 0 });
 
   const handleFwdBtn = () => {
-    if (sound) {
-      sound.pause();
-    }
+    if (sound) sound.pause();
     let songIndex = songList.findIndex((obj) => obj.songID === songObj.songID);
     let nextSongIndex = (songIndex + 1) % songList.length;
-    let nextSong = songList[nextSongIndex];
-    dispatch(loadSongById(nextSong.songID));
+    dispatch(loadSongById(songList[nextSongIndex].songID));
   };
 
   const handleBackBtn = () => {
-    if (sound) {
-      sound.pause();
-    }
+    if (sound) sound.pause();
     let songIndex = songList.findIndex((obj) => obj.songID === songObj.songID);
-    let nextSongIndex =
-      songIndex == 0 ? songList.length - 1 : (songIndex - 1) % songList.length;
-    let nextSong = songList[nextSongIndex];
-    dispatch(loadSongById(nextSong.songID));
+    let nextSongIndex = songIndex === 0 ? songList.length - 1 : (songIndex - 1) % songList.length;
+    dispatch(loadSongById(songList[nextSongIndex].songID));
   };
 
   useEffect(() => {
     const songUrl = songObj?.songUrl || "";
-    // Initialize the Howl instance
     const newSound = new Howl({
       src: [songUrl],
       html5: true,
-
       onplay: (id) => {
         setIsPlaying(true);
         setSeekId(id);
-
         const updateInterval = setInterval(() => {
           const seekTime = newSound.seek(id);
           setSeconds(Math.floor(seekTime));
@@ -74,31 +60,19 @@ export default function Home() {
           const sec = Math.floor(seekTime % 60);
           setCurrTime({ min, sec });
         }, 1000);
-        newSound.on("end", () => {
-          setIsPlaying(false);
-          clearInterval(updateInterval);
-        });
-        newSound.on("pause", () => {
-          clearInterval(updateInterval);
-        });
+        newSound.on("end", () => { setIsPlaying(false); clearInterval(updateInterval); });
+        newSound.on("pause", () => { clearInterval(updateInterval); });
       },
-      onpause: () => {
-        setIsPlaying(false);
-      },
-      onend: () => {
-        setIsPlaying(false);
-      },
+      onpause: () => setIsPlaying(false),
+      onend: () => setIsPlaying(false),
       onload: (id) => {
         setIsLoaded(true);
         let newDuration = newSound.duration(id);
         setDuration(newDuration);
-        const min = Math.floor(newDuration / 60);
-        const sec = Math.floor(newDuration % 60);
-        setTime({ min, sec });
+        setTime({ min: Math.floor(newDuration / 60), sec: Math.floor(newDuration % 60) });
       },
     });
     setSound(newSound);
-
     return () => {
       if (newSound) {
         newSound.stop();
@@ -111,19 +85,11 @@ export default function Home() {
   }, [songObj]);
 
   const playingButton = () => {
-    if (sound) {
-      if (isPlaying) {
-        sound.pause();
-      } else {
-        sound.play();
-      }
-    }
+    if (sound) { isPlaying ? sound.pause() : sound.play(); }
   };
 
   const handleTimeBar = (e: ChangeEvent<HTMLInputElement>) => {
-    if (sound) {
-      sound.seek(Number(e.target.value), seekId);
-    }
+    if (sound) sound.seek(Number(e.target.value), seekId);
   };
 
   const handleNavigate = async () => {
@@ -132,7 +98,7 @@ export default function Home() {
   };
 
   return (
-    <div className=" h-screen">
+    <div className={`h-screen ${isNavCollapsed ? "nav-collapsed" : ""}`}>
       <NavBar
         handleNavigate={handleNavigate}
         currTime={currTime}
@@ -147,8 +113,9 @@ export default function Home() {
         handleToggleSidebar={handleToggleSidebar}
         handleFwdBtn={handleFwdBtn}
         handleBackBtn={handleBackBtn}
+        isNavCollapsed={isNavCollapsed}
+        toggleNavCollapsed={toggleNavCollapsed}
       />
-
       <div className="flex main-body overflow-clip">
         <SideBar
           isSidebarShown={isSidebarShown}
@@ -160,3 +127,4 @@ export default function Home() {
     </div>
   );
 }
+
